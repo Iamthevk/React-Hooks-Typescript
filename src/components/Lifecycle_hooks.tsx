@@ -11,11 +11,23 @@ const Issues: FC =() => {
     useEffect(() => {
         axios.get("https://api.github.com/repos/ContentPI/ContentPI/issues")
         .then((res:any) => {
-            console.log(res)
+            // console.log(res)
+            setIssues(res.data)
         })
     },[])
     return(
-        <h1>Hello</h1>
+        <>
+        <h1>ContentPI Issues</h1>
+        {issues.map((issue: Issues)=>(
+            <p key={issue.title}>
+               <strong>#{issue.number}</strong> {' '}
+        <a href=
+          {`https://github.com/ContentPI/ContentPI/issues/${issue.number}`} 
+            target="_blank" rel="noreferrer">{issue.title}</a> {' '}
+        {issue.state}  
+            </p>
+        ))}
+        </>
     )
 }
 
